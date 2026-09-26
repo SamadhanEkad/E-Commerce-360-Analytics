@@ -1,0 +1,53 @@
+
+SQL*Loader: Release 21.0.0.0.0 - Production on Thu Aug 27 23:07:27 2026
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle and/or its affiliates.  All rights reserved.
+
+Control File:   sql\ctl\06_order_payments.ctl
+Data File:      C:\Users\Sam\OneDrive\Documents\PROJECTS\DataAnalyst\E-Commerce-360-Analytics\data\processed\order_payments.csv
+  Bad File:     sql\ctl\order_payments.bad
+  Discard File:  none specified
+ 
+ (Allow all discards)
+
+Number to load: ALL
+Number to skip: 1
+Errors allowed: 50
+Bind array:     250 rows, maximum of 1048576 bytes
+Continuation:    none specified
+Path used:      Conventional
+
+Table ORDER_PAYMENTS, loaded from every logical record.
+Insert option in effect for this table: APPEND
+TRAILING NULLCOLS option in effect
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+ORDER_ID                            FIRST     *   ,  O(") CHARACTER            
+PAYMENT_SEQUENTIAL                   NEXT     *   ,  O(") CHARACTER            
+PAYMENT_TYPE                         NEXT     *   ,  O(") CHARACTER            
+PAYMENT_INSTALLMENTS                 NEXT     *   ,  O(") CHARACTER            
+PAYMENT_VALUE                        NEXT     *   ,  O(") CHARACTER            
+
+
+Table ORDER_PAYMENTS:
+  103886 Rows successfully loaded.
+  0 Rows not loaded due to data errors.
+  0 Rows not loaded because all WHEN clauses were failed.
+  0 Rows not loaded because all fields were null.
+
+
+Space allocated for bind array:                 322500 bytes(250 rows)
+Read   buffer bytes: 1048576
+
+Total logical records skipped:          1
+Total logical records read:        103886
+Total logical records rejected:         0
+Total logical records discarded:        0
+
+Run began on Thu Aug 27 23:07:27 2026
+Run ended on Thu Aug 27 23:07:36 2026
+
+Elapsed time was:     00:00:08.86
+CPU time was:         00:00:00.89

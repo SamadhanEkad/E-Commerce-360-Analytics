@@ -1,0 +1,56 @@
+
+SQL*Loader: Release 21.0.0.0.0 - Production on Sat Sep 26 15:08:11 2026
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle and/or its affiliates.  All rights reserved.
+
+Control File:   sql\ctl\07_order_reviews.ctl
+Data File:      C:\Users\Sam\OneDrive\Documents\PROJECTS\DataAnalyst\E-Commerce-360-Analytics\data\processed\order_reviews.csv
+  Bad File:     sql\ctl\order_reviews.bad
+  Discard File:  none specified
+ 
+ (Allow all discards)
+
+Number to load: ALL
+Number to skip: 1
+Errors allowed: 50000
+Bind array:     1000 rows, maximum of 1048576 bytes
+Continuation:    none specified
+Path used:      Conventional
+
+Table ORDER_REVIEWS, loaded from every logical record.
+Insert option in effect for this table: APPEND
+TRAILING NULLCOLS option in effect
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+REVIEW_ID                           FIRST    50   ,  O(") CHARACTER            
+ORDER_ID                             NEXT    50   ,  O(") CHARACTER            
+REVIEW_SCORE                         NEXT     *   ,  O(") CHARACTER            
+REVIEW_COMMENT_TITLE                 NEXT   500   ,  O(") CHARACTER            
+REVIEW_COMMENT_MESSAGE               NEXT  4000   ,  O(") CHARACTER            
+REVIEW_CREATION_DATE                 NEXT     *   ,  O(") DATETIME YYYY-MM-DD HH24:MI:SS
+REVIEW_ANSWER_TIMESTAMP              NEXT     *   ,  O(") DATETIME YYYY-MM-DD HH24:MI:SS
+
+value used for ROWS parameter changed from 1000 to 194
+
+Table ORDER_REVIEWS:
+  99224 Rows successfully loaded.
+  0 Rows not loaded due to data errors.
+  0 Rows not loaded because all WHEN clauses were failed.
+  0 Rows not loaded because all fields were null.
+
+
+Space allocated for bind array:                1044108 bytes(194 rows)
+Read   buffer bytes: 1048576
+
+Total logical records skipped:          1
+Total logical records read:         99224
+Total logical records rejected:         0
+Total logical records discarded:        0
+
+Run began on Sat Sep 26 15:08:11 2026
+Run ended on Sat Sep 26 15:08:37 2026
+
+Elapsed time was:     00:00:25.93
+CPU time was:         00:00:01.28

@@ -1,10 +1,13 @@
+-- ============================================================
 -- E-Commerce 360° Analytics
--- Database Schema
--- Purpose: Create relational tables for Olist analytics
+-- File: 01_database_schema.sql
+-- Purpose: Create relational database schema
+-- Database: Oracle Database 21c XE
+-- ============================================================
 
 
 -- ============================================================
--- 1. CUSTOMERS TABLE
+-- 1. CUSTOMERS
 -- ============================================================
 
 CREATE TABLE customers (
@@ -17,7 +20,7 @@ CREATE TABLE customers (
 
 
 -- ============================================================
--- 2. ORDERS TABLE
+-- 2. ORDERS
 -- ============================================================
 
 CREATE TABLE orders (
@@ -29,7 +32,6 @@ CREATE TABLE orders (
     order_delivered_carrier_date TIMESTAMP,
     order_delivered_customer_date TIMESTAMP,
     order_estimated_delivery_date TIMESTAMP,
-
     CONSTRAINT fk_orders_customer
         FOREIGN KEY (customer_id)
         REFERENCES customers(customer_id)
@@ -37,7 +39,7 @@ CREATE TABLE orders (
 
 
 -- ============================================================
--- 3. PRODUCTS TABLE
+-- 3. PRODUCTS
 -- ============================================================
 
 CREATE TABLE products (
@@ -54,7 +56,7 @@ CREATE TABLE products (
 
 
 -- ============================================================
--- 4. SELLERS TABLE
+-- 4. SELLERS
 -- ============================================================
 
 CREATE TABLE sellers (
@@ -66,7 +68,7 @@ CREATE TABLE sellers (
 
 
 -- ============================================================
--- 5. ORDER ITEMS TABLE
+-- 5. ORDER ITEMS
 -- ============================================================
 
 CREATE TABLE order_items (
@@ -77,18 +79,14 @@ CREATE TABLE order_items (
     shipping_limit_date TIMESTAMP,
     price NUMBER(10,2),
     freight_value NUMBER(10,2),
-
     CONSTRAINT pk_order_items
         PRIMARY KEY (order_id, order_item_id),
-
     CONSTRAINT fk_order_items_order
         FOREIGN KEY (order_id)
         REFERENCES orders(order_id),
-
     CONSTRAINT fk_order_items_product
         FOREIGN KEY (product_id)
         REFERENCES products(product_id),
-
     CONSTRAINT fk_order_items_seller
         FOREIGN KEY (seller_id)
         REFERENCES sellers(seller_id)
@@ -96,7 +94,7 @@ CREATE TABLE order_items (
 
 
 -- ============================================================
--- 6. ORDER PAYMENTS TABLE
+-- 6. ORDER PAYMENTS
 -- ============================================================
 
 CREATE TABLE order_payments (
@@ -105,10 +103,8 @@ CREATE TABLE order_payments (
     payment_type VARCHAR2(30),
     payment_installments NUMBER,
     payment_value NUMBER(10,2),
-
     CONSTRAINT pk_order_payments
         PRIMARY KEY (order_id, payment_sequential),
-
     CONSTRAINT fk_order_payments_order
         FOREIGN KEY (order_id)
         REFERENCES orders(order_id)
@@ -116,18 +112,19 @@ CREATE TABLE order_payments (
 
 
 -- ============================================================
--- 7. ORDER REVIEWS TABLE
+-- 7. ORDER REVIEWS
 -- ============================================================
 
 CREATE TABLE order_reviews (
-    review_id VARCHAR2(50) PRIMARY KEY,
+    review_id VARCHAR2(50),
     order_id VARCHAR2(50),
     review_score NUMBER,
-    review_comment_title VARCHAR2(255),
+    review_comment_title VARCHAR2(500),
     review_comment_message VARCHAR2(4000),
     review_creation_date TIMESTAMP,
     review_answer_timestamp TIMESTAMP,
-
+    CONSTRAINT pk_order_reviews
+        PRIMARY KEY (review_id, order_id),
     CONSTRAINT fk_order_reviews_order
         FOREIGN KEY (order_id)
         REFERENCES orders(order_id)
@@ -135,7 +132,7 @@ CREATE TABLE order_reviews (
 
 
 -- ============================================================
--- 8. PRODUCT CATEGORY TRANSLATION TABLE
+-- 8. PRODUCT CATEGORY TRANSLATION
 -- ============================================================
 
 CREATE TABLE product_category_translation (
@@ -145,7 +142,7 @@ CREATE TABLE product_category_translation (
 
 
 -- ============================================================
--- 9. GEOLOCATION TABLE
+-- 9. GEOLOCATION
 -- ============================================================
 
 CREATE TABLE geolocation (
@@ -156,3 +153,31 @@ CREATE TABLE geolocation (
     geolocation_state VARCHAR2(10)
 );
 
+
+-- ============================================================
+-- 10. HIGH-SPEED ANALYTICAL & PERFORMANCE INDEXES
+-- ============================================================
+
+-- Foreign Key Indexes (Accelerates Joins across Relational Schema)
+CREATE INDEX idx_orders_customer ON orders(customer_id);
+CREATE INDEX idx_order_items_order ON order_items(order_id);
+CREATE INDEX idx_order_items_product ON order_items(product_id);
+CREATE INDEX idx_order_items_seller ON order_items(seller_id);
+CREATE INDEX idx_order_payments_order ON order_payments(order_id);
+CREATE INDEX idx_order_reviews_order ON order_reviews(order_id);
+
+-- Filter & Analytical Search Indexes (Accelerates WHERE / GROUP BY / Window Functions)
+CREATE INDEX idx_orders_status ON orders(order_status);
+CREATE INDEX idx_orders_purchase_timestamp ON orders(order_purchase_timestamp);
+CREATE INDEX idx_customers_unique_id ON customers(customer_unique_id);
+CREATE INDEX idx_products_category ON products(product_category_name);
+CREATE INDEX idx_geolocation_zip ON geolocation(geolocation_zip_code_prefix);
+
+
+-- ============================================================
+-- SCHEMA CREATION COMPLETE
+-- ============================================================
+
+PROMPT ============================================================
+PROMPT Database schema & analytical indexes created successfully.
+PROMPT ============================================================

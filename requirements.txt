@@ -1,0 +1,38 @@
+# ============================================================
+# E-Commerce 360° Analytics - Project Dependencies
+# ============================================================
+
+# Core Data Processing & Analysis
+pandas>=2.2.0
+numpy>=1.26.0
+scipy>=1.12.0
+
+# Database & SQL
+SQLAlchemy>=2.0.0
+# oracledb>=2.0.0  # Uncomment for Oracle Database 21c XE
+
+# Data Visualization
+matplotlib>=3.8.0
+seaborn>=0.13.0
+altair>=5.0.0
+plotly>=5.18.0
+
+# Excel & Reporting
+openpyxl>=3.1.2
+xlsxwriter>=3.1.9
+pymupdf>=1.24.0
+
+# Machine Learning & Statistics
+scikit-learn>=1.4.0
+
+# AI Analytics Assistant
+streamlit>=1.35.0
+google-genai>=0.1.0
+google-generativeai>=0.8.0
+python-dotenv>=1.0.0
+pydantic>=2.7.0
+
+# Jupyter & Interactive Environment
+jupyter>=1.0.0
+ipykernel>=6.29.0
+nbformat>=5.10.0
